@@ -5,7 +5,4 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
-  setHello(): string {
-    return 'Post: Hello created with sucess!';
-  }
 }
