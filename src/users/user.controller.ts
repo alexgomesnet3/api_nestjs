@@ -19,17 +19,12 @@ export class UserController {
 
   @Get()
   async getUsers() {
-    return {
-      users: [],
-    };
+    return this.userService.getUsers();
   }
 
   @Get(':id')
   async getUserId(@Param('id', ParseIntPipe) id: number) {
-    return {
-      id,
-      user: {},
-    };
+    return this.userService.getUserId(id);
   }
 
   @Post()
@@ -40,16 +35,9 @@ export class UserController {
   @Put(':id')
   async updateUserId(
     @Param('id', ParseIntPipe) id: number,
-    @Body() { name, email, password, phone }: UpdateUserDto,
+    @Body() data: UpdateUserDto,
   ) {
-    return {
-      method: 'put',
-      id,
-      name,
-      email,
-      password,
-      phone,
-    };
+    return this.userService.updateUserId(id, data);
   }
 
   @Patch(':id')
