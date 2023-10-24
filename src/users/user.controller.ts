@@ -33,13 +33,8 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() { name, email, password, phone }: CreateUserDto) {
-    return {
-      name,
-      email,
-      password,
-      phone,
-    };
+  async createUser(@Body() data: CreateUserDto) {
+    return this.userService.createUser(data);
   }
 
   @Put(':id')
