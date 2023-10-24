@@ -43,22 +43,13 @@ export class UserController {
   @Patch(':id')
   async partialUpdateUserId(
     @Param('id', ParseIntPipe) id: number,
-    @Body() { name, email, password, phone }: PartialUpdateUserDto,
+    @Body() data: PartialUpdateUserDto,
   ) {
-    return {
-      method: 'patch',
-      id,
-      name,
-      email,
-      password,
-      phone,
-    };
+    return this.userService.partialUpdateUserId(id, data);
   }
 
   @Delete(':id')
   async deleteUserId(@Param('id', ParseIntPipe) id: number) {
-    return {
-      id,
-    };
+    return this.userService.deleteUserId(id);
   }
 }

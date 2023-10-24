@@ -59,4 +59,21 @@ export class UserService {
       },
     });
   }
+
+  async partialUpdateUserId(id, data: CreateUserDto) {
+    return this.prisma.user.update({
+      data,
+      where: {
+        id,
+      },
+    });
+  }
+
+  async deleteUserId(id) {
+    return this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
