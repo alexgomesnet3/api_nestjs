@@ -1,36 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PartialUpdateUserDto, UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getUsers() {
-    return this.prisma.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        password: true,
-        phone: true,
-        createdAt: true,
-        updateAt: true,
-      },
-    });
+    return this.prisma.user.findMany();
   }
 
-  async getUserId(id) {
+  async getUserId(id: number) {
     return this.prisma.user.findUnique({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        password: true,
-        phone: true,
-        createdAt: true,
-        updateAt: true,
-      },
       where: {
         id,
       },
@@ -51,7 +33,7 @@ export class UserService {
     });
   }
 
-  async updateUserId(id, data: CreateUserDto) {
+  async updateUserId(id: number, data: UpdateUserDto) {
     return this.prisma.user.update({
       data,
       where: {
@@ -60,7 +42,7 @@ export class UserService {
     });
   }
 
-  async partialUpdateUserId(id, data: CreateUserDto) {
+  async partialUpdateUserId(id: number, data: PartialUpdateUserDto) {
     return this.prisma.user.update({
       data,
       where: {
@@ -69,7 +51,7 @@ export class UserService {
     });
   }
 
-  async deleteUserId(id) {
+  async deleteUserId(id: number) {
     return this.prisma.user.delete({
       where: {
         id,
